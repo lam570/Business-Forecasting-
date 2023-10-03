@@ -1,0 +1,109 @@
+----
+title: "HW1"
+author: "Leon Masin"
+date: "2023-10-03"
+output: html_document
+---
+```{r}
+
+#import survey file
+#renamed employee survey file to data.xlsx
+#adding & renaming headers (Q1)
+
+library(readxl)
+data <- read_excel("C:/Users/Leon/Downloads/BF/data.xlsx")
+
+colnames(data)[1] = "age"
+colnames(data)[2] = "gender"
+colnames(data)[3] = "jobsatisfaction"
+colnames(data)[4] = "jobcharacteristics"
+colnames(data)[5] = "yearsworked"
+colnames(data)[6] = "promotion"
+colnames(data)[7] = "decisionmaking"
+colnames(data)[8] = "budgetarymaking"
+colnames(data)[9] = "pridelevel"
+colnames(data)[10] = "jobhappiness"
+colnames(data)[11] = "coworkerrelations"
+
+#Column summary's & boxplot (Q2)
+fivenum(data$age)
+summary(data$age)
+boxplot(data$age)
+
+fivenum(data$gender)
+summary(data$gender)
+boxplot(data$gender)
+
+fivenum(data$jobsatisfaction)
+summary(data$jobsatisfaction)
+boxplot(data$jobsatisfaction)
+
+fivenum(data$jobcharacteristics)
+summary(data$jobcharacteristics)
+boxplot(data$jobcharacteristics)
+
+fivenum(data$yearsworked)
+summary(data$yearsworked)
+boxplot(data$yearsworked)
+
+fivenum(data$promotion)
+summary(data$promotion)
+boxplot(data$promotion)
+
+fivenum(data$decisionmaking)
+summary(data$decisionmaking)
+boxplot(data$decisionmaking)
+
+fivenum(data$budgetarymaking)
+summary(data$budgetarymaking)
+boxplot(data$budgetarymaking)
+
+fivenum(data$pridelevel)
+summary(data$pridelevel)
+boxplot(data$pridelevel)
+
+fivenum(data$jobhappiness)
+summary(data$jobhappiness)
+boxplot(data$jobhappiness)
+
+fivenum(data$coworkerrelations)
+summary(data$coworkerrelations)
+boxplot(data$coworkerrelations)
+
+#Factor Making (Q3)
+data$jobsatisfaction <- as.factor(data$jobsatisfaction)
+data$jobcharacteristics <- as.factor(data$jobcharacteristics)
+data$promotion <- as.factor(data$promotion)
+data$decisionmaking <- as.factor(data$decisionmaking)
+data$budgetarymaking <- as.factor(data$budgetarymaking)
+data$pridelevel <- as.factor(data$pridelevel)
+data$jobhappiness <- as.factor(data$jobhappiness)
+data$coworkerrelations <- as.factor(data$coworkerrelations)
+
+#Visual Plots (Q4)
+boxplot(data$age)
+hist(data$gender)
+pie(table(data$jobsatisfaction))
+boxplot(data$jobcharacteristics)
+hist(data$yearsworked)
+pie(table(data$promotion))
+barplot(table(data$decisionmaking))
+pie(table(data$budgetarymaking))
+barplot(table(data$pridelevel))
+barplot(table(data$jobhappiness))
+pie(table(data$coworkerrelations))
+
+#Scatterplots (Q5)
+library(ggplot2)
+library(GGally)
+
+ggplot(data) + geom_point(aes(x = age, y=promotion))
+
+ggplot(data) + geom_point(aes(x = gender, y=jobhappiness))
+
+ggplot(data) + geom_point(aes(x = yearsworked, y=coworkerrelations))
+
+
+
+```
+
