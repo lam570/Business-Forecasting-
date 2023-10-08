@@ -1,0 +1,66 @@
+|                       |
+|----------------------:|
+|          title: "HW3" |
+|  author: "Leon Masin" |
+|    date: "2023-10-08" |
+| output: html_document |
+
+```{r}
+#initalize packages
+
+library(fpp)
+library(fpp2)
+library(TTR)
+library(readxl)
+oil <- read_excel("C:/Users/Leon/Downloads/BF/HW2/oil.xlsx")
+
+#Question 1- different models
+acf(oil$VALUE)
+
+naive_forecast <- naive(oil$VALUE,5)
+plot(naive_forecast)
+
+HW_forecast <- HoltWinters(oil$VALUE, beta = FALSE, gamma = FALSE)
+plot(HW_forecast)
+
+
+#Question 2- model output explanation
+#the acf plot shows the coefficient of correlation and in our graph that the value of oil is consistent over time
+
+#the naive forecast shows a basic time series forecast using previous data and in my data that the price of oil will have sharp increases in the near future but also a sharp decline later so its a good benchmark to indicate that the price of oil will indeed go up
+
+#the Holt winters forecast is used with exponential smoothing and for data that has seasonality, level, and trend, and with my data it shows a very consistent trend of oil values save for a couple of noticeably large increases in oil prices  
+
+#Question 3- time series/mean forecast in one graph
+time_series <- ts(oil$VALUE,5)
+plot(time_series)
+
+mean_forecast <- meanf(oil$VALUE,5)
+plot(mean_forecast)
+
+rwf_forecast <- rwf(oil$VALUE,5)
+rwf_forecast <- rwf(oil$VALUE,5, drift=TRUE)
+MA5_forecast <- ma(oil$VALUE,order=5)
+MA9_forecast <- ma(oil$VALUE,order=9)
+snaive_forecast <- snaive(oil$VALUE,5)
+
+ plot(mean_forecast)
+lines(naive_forecast$mean,col="red")
+lines(rwf_forecast$mean,col="green")
+lines(snaive_forecast$mean,col="black")
+lines(MA5_forecast,col="Pink")
+lines(MA9_forecast,col="Blue")
+
+
+#Question 4- accuracy measures
+accuracy(rwf_forecast)
+accuracy(mean_forecast)
+accuracy(snaive_forecast)
+
+#the accuracy measure that I will use to determine the best forecasting method for my data would be MAE or the Mean Absolute Error because it tells us the average error the forecast will provide meaning that the lowest value is the preferred since it's the most statistically accurate forecast, which in this case would be the snaive forecast AKA the simple naive forecast.  
+
+
+
+
+
+```
