@@ -1,0 +1,20 @@
+|                       |
+  |----------------------:|
+  |          title: "HW5" |
+  |  author: "Leon Masin" |
+  |    date: "2023-10-28" |
+  | output: html_document |
+  
+  ```{r}
+
+library(fpp)
+library(fpp2)
+library(TTR)
+library(readxl)
+
+oil <- read.csv("C:/Users/Leon/Downloads/oil (1).csv")
+ts<-ts(oil$dcoilwtico,start=c(2013,1), end=c(2017,12), frequency=12)
+decompose <- decompose(ts)
+plot(decompose)
+
+```
